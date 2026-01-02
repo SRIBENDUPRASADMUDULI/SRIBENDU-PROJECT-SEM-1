@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YONRO - Airbnb Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Circular+STD:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Circular STD', sans-serif; color: black; background: white; }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            border-bottom: 1px solid lightgray;
+            position: sticky;
+            top: 0;
+            background: white;
+        
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: red; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+        nav a { text-decoration: none; color: black; font-weight: bold; }
+        .user-icons i { margin-left: 1rem; font-size: 1.2rem; cursor: pointer; }
+
+        .hero {
+            position: relative;
+            height: 70vh;
+            background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            background-color: gray;
+        }
+
+        .search-form {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px black;
+            display: flex;
+            gap: 0.5rem;
+            width: 90%;
+            max-width: 900px;
+        }
+        .search-form input, .search-form select, .search-form button {
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-form button {
+            background: red;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            padding: 0 2rem;
+        }
+
+        .categories {
+            padding: 2rem 5%;
+            display: flex;
+            overflow-x: auto;
+            gap: 2.5rem;
+        }
+        .category { text-align: center; min-width: 90px; cursor: pointer; }
+        .category img { width: 30px; height: 30px; margin-bottom: 0.5rem; }
+        .category p { font-size: 0.8rem; font-weight: bold; }
+
+        .properties {
+            padding: 2rem 5%;
+            display: grid;
+            gap: 2rem;
+        }
+
+        
+        .card { width: 100%; border-radius: 1rem; overflow: hidden; border: 1px solid lightgray; background: white; }
+        
+        .media-box {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+        }
+
+    
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.3s;
+        }
+
+        
+        .card-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        A
+        .media-box:hover .card-img {
+            opacity: 0;
+        }
+
+        .card-info { padding: 1rem; }
+        .rating { color: black; font-weight: bold; }
+        .price { color: black; margin-top: 0.5rem; }
+
+        footer {
+            padding: 3rem 5%;
+            background: whitesmoke;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-top: 1px solid lightgray;
+        }
+        footer ul { list-style: none; min-width: 150px; margin-bottom: 2rem; }
+        footer ul li { margin-bottom: 0.5rem; color: black; font-size: 0.9rem; }
+        footer ul li strong { display: block; margin-bottom: 1rem; text-transform: uppercase; }
+
+        .creator-footer {
+            background: black;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        @media (min-width: 1025px) { .properties { grid-template-columns: repeat(4, 1fr); } }
+        @media (max-width: 1024px) and (min-width: 768px) { .properties { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 767px) {
+            header nav { display: none; }
+            .hero { height: 50vh; }
+            .search-form { flex-direction: column; border-radius: 15px; top: 50%; width: 85%; }
+            .search-form input, .search-form select, .search-form button { width: 100%; border-bottom: 1px solid lightgray; }
+            .properties { grid-template-columns: 1fr; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">YONRO</div>
+        <nav>
+            <ul>
+                <li><a href="#">Places to stay</a></li>
+                <li><a href="#">Experiences</a></li>
+                <li><a href="#">Online Experiences</a></li>
+            </ul>
+        </nav>
+        <div class="user-icons">
+            <i class="fas fa-globe"></i>
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </header>
+
+    <section class="hero">
+        <form class="search-form">
+            <input type="text" placeholder="Where to?">
+            <input type="date">
+            <input type="date">
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    <section class="categories">
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/2664/2664589.png" alt="Beach"><p>Beach</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/2509/2509733.png" alt="Cabins"><p>Cabins</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/489/489868.png" alt="Trending"><p>Trending</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/2933/2933801.png" alt="Mansions"><p>Mansions</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/619/619043.png" alt="Islands"><p>Islands</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/1051/1051405.png" alt="Countryside"><p>Countryside</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/3014/3014562.png" alt="Desert"><p>Desert</p></div>
+        <div class="category"><img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Pools"><p>Amazing pools</p></div>
+    </section>
+
+    <section class="properties">
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxS7WvPZ5O8/giphy.gif" class="card-gif" alt="Moving Scene">
+                <img src="https://www.bestgoadeals.com/uploads/hotel/pics/27_pic_lalit-hotel-goa.jpg" class="card-img" alt="Static Image">
+            </div>
+            <div class="card-info">
+                <h3>Luxury Villa in Goa</h3>
+                <p class="rating">★ 4.95</p>
+                <p class="price"><strong>$550</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHJGHe3yAMhdQ4/giphy.gif" class="card-gif">
+                <img src="https://th.bing.com/th/id/OIP.YuvT8fESNa5lLeMBgLDX-gHaE8?o=7&rs=1&pid=ImgDetMain" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Luxury Villa in Bali</h3>
+                <p class="rating">★ 4.85</p>
+                <p class="price"><strong>$250</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKVUn7iM8FMEU24/giphy.gif" class="card-gif">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.9I8Ezk7mJVPfaKCfA1kp3gHaE8?rs=1&pid=ImgDetMain" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Luxury Villa in Fuji</h3>
+                <p class="rating">★ 4.75</p>
+                <p class="price"><strong>$450</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Zt8qDiLIIUJA8eA/giphy.gif" class="card-gif">
+                <img src="https://www.theluxevoyager.com/wp-content/uploads/2020/09/The-Nautilus-Maldives-Beach-Residence.jpg" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Luxury Villa in Maldives</h3>
+                <p class="rating">★ 4.90</p>
+                <p class="price"><strong>$350</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41lTfuxm1R6K8tW0/giphy.gif" class="card-gif">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>New York Penthouse</h3>
+                <p class="rating">★ 4.99</p>
+                <p class="price"><strong>$800</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw=giphy.gif" class="card-gif">
+                <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=600" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Swiss Alps Cottage</h3>
+                <p class="rating">★ 4.82</p>
+                <p class="price"><strong>$400</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxS7WvPZ5O8/giphy.gif" class="card-gif">
+                <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?auto=format&fit=crop&w=600" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Modern Treehouse</h3>
+                <p class="rating">★ 4.90</p>
+                <p class="price"><strong>$150</strong> night</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="media-box">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R4bm93amZ4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eXp4eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHJGHe3yAMhdQ4/giphy.gif" class="card-gif">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600" class="card-img">
+            </div>
+            <div class="card-info">
+                <h3>Beverly Hills Mansion</h3>
+                <p class="rating">★ 5.0</p>
+                <p class="price"><strong>$1500</strong> night</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <ul>
+            <li><strong>Support</strong></li>
+            <li>Help Center</li>
+            <li>Contact: 98111939384</li>
+        </ul>
+    </footer>
+
+    <div class="creator-footer">
+        <p>Project Created by Sribendu Prasad Muduli</p>
+        <p>© Airbnb Clone</p>
+    </div>
+
+</body>
+</html>
